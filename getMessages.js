@@ -7,6 +7,6 @@ function getMessages() {
          document.getElementById("messages").innerHTML = xhttp.responseText;
       }
   };
-  xhttp.open("GET", "minichat_get.php", true);
+  xhttp.open("GET", "chat_get.php", true);
   xhttp.send();
 }

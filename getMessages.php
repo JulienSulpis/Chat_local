@@ -9,8 +9,8 @@ catch(Exception $e)
         die('Erreur : '.$e->getMessage());
 }
 
-// Récupération des 10 derniers messages
-$reponse = $bdd->query('SELECT pseudo, message, DATE_FORMAT(date_message, \'%d/%m/%Y à %Hh%imin%ss\') AS date_message FROM mini_chat ORDER BY ID DESC LIMIT 0, 50');
+// Récupération des 20 derniers messages
+$reponse = $bdd->query('SELECT pseudo, message, DATE_FORMAT(date_message, \'%d/%m/%Y à %Hh%imin%ss\') AS date_message FROM mini_chat ORDER BY ID DESC LIMIT 0, 20');
 
 // Affichage de chaque message (toutes les données sont protégées par htmlspecialchars)
 while ($donnees = $reponse->fetch())

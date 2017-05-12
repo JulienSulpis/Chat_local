@@ -9,7 +9,7 @@ catch(Exception $e)
      {   die('Erreur : '.$e->getMessage());
 }
 
-// Insertion du message à l'aide d'une requête préparée, si les champs ne sont pas vides 
+// Insertion du message à l'aide d'une requête préparée, si les champs ne sont pas vides
 if ($_POST['pseudo'] != "" AND $_POST['message'] != ""){
 	$req = $bdd->prepare('INSERT INTO mini_chat (pseudo, message, date_message) VALUES(?, ?, NOW())');
 	$req->execute(array($_POST['pseudo'], $_POST['message']));
