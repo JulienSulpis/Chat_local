@@ -3,24 +3,27 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Chat local</title>
+  <title>Le chat de l'ambiance</title>
   <link href="bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet">
   <style type="text/css">
+  body{
+    background-color: white;
+  }
   .container {
-    background-color: inherit;
+    background-color: white;
+    border-right-width: medium;
   }
   .day {
     text-align: center;
-    border-bottom: 1px solid #eee;
-    background-color: #f2f2f2;
+    border-bottom: 2px solid #cbcbcb;
+    color: #cbcbcb;
     border-radius: 6px;
-    line-height: 20px;
+    line-height: 40px;
   }
   .message-ligne{
     margin-bottom: 5px;
     border-bottom: 1px solid #eee
   }
-  form {margin-bottom: 30px}
   </style>
 
 </head>
@@ -29,69 +32,66 @@
 <body>
   <div class="container">
     <header class="page-header">
-      <h1>Chat local</h1>
+      <h1>Le chat de l'ambiance</h1>
     </header>
 
     <div class="row">
       <div class="col-lg-7">
         <div class="row">
-          <form action="chat_post.php" method="post" class="form-horizontal col-lg-12">
+          <form id="formulaire" action="chat_post.php" method="post" class="form-horizontal col-lg-12">
 
-            <div class="row">
-              <div class="form-group">
-                <label for="pseudo" class="col-lg-2 control-label">Pseudo :</label>
-                <div class="col-lg-10">
-                  <input type="text" class="form-control" name="pseudo" id="pseudo"
-                  <?php if(isset($_COOKIE['pseudo'])) {echo 'value="' . $_COOKIE['pseudo'] . '"';} ?> />
-                </div>
+            <div class="form-group col-lg-12">
+              <div class="row">
+                <?php echo'<div class="col-lg-4';
+                if(isset($_GET['pseudo'])){echo ' has-error has-feedback">';}
+                else{echo '">';}?>
+                <input type="text" class="form-control" name="pseudo" id="pseudo" placeholder="Pseudo"
+                <?php if(isset($_COOKIE['pseudo'])) {echo 'value="' . $_COOKIE['pseudo'] . '"';}
+                else{ echo 'autofocus="autofocus"';}
+                echo '/>';
+                if(isset($_GET['pseudo'])){echo '<span class="glyphicon glyphicon-remove form-control-feedback"></span><span class="help-block" style="margin-bottom:-8px">Pseudo incorrect</span>';}?>
               </div>
-            </div>
-
-            <div class="row">
-              <div class="form-group">
-                <label for="message" class="col-lg-2 control-label">Message :</label>
-                <div class="col-lg-10">
-                  <input type="text" class="form-control" name="message" id="message" />
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="checkbox col-lg-offset-2 col-lg-4">
-                <label for="yes" class="checkbox">
-                  <input type="checkbox" name="memo" value="yes">Se souvenir de moi
+              <div class="col-lg-8">
+                <label for="memo" class="checkbox">
+                  <input type="checkbox" name="memo"><span style="font-weight:normal"> Se souvenir de moi</span>
                 </label>
               </div>
-              <button class="btn btn-primary col-lg-offset-4 col-lg-2" type="submit">Envoyer</button>
             </div>
+          </div>
 
-          </form>
+          <div class="form-group col-lg-12">
+            <?php if(isset($_GET['message'])){echo '<div class="has-error has-feedback">';}?>
+              <input type="text" class="form-control" name="message" placeholder="Message" autofocus="autofocus" id="message"/>
+              <?php if(isset($_GET['message'])){echo '<span class="glyphicon glyphicon-remove form-control-feedback"></span><span class="help-block" style="margin-bottom:-8px">Message incorrect</span></div>';}?>
+              </div>
+              <button class="btn btn-primary col-lg-2" type="submit" style="display:none">Envoyer</button>
+            </form>
 
             <!-- on affiche la conversation dans la div -->
             <div id="messages"></div>
+          </div>
 
+        </div>
+
+        <div class="col-lg-offset-2 col-lg-3">
+          <!-- on insère les pseudos -->
+          <table class="table">
+            <caption>
+              <h2>Participants</h2>
+            </caption>
+            <tbody>
+              <?php include "getPseudos.php" ?>
+              <!--<div id="pseudos"></div>-->
+            </tbody>
+          </table>
         </div>
       </div>
 
-      <div class="col-lg-offset-2 col-lg-3">
-        <!-- on insère les pseudos -->
-        <table class="table">
-          <caption>
-            <h2>Participants</h2>
-          </caption>
-          <tbody>
-            <?php include "getPseudos.php" ?>
-            <!--<div id="pseudos"></div>-->
-          </tbody>
-        </table>
-      </div>
+      <script src="getMessages.js"></script>
+      <script src="getPseudos.js"></script>
+      <!-- on exécute getMessages() toutes les 500ms -->
+      <script>setInterval(getMessages, 500);</script>
+      <script>setInterval(getPseudos, 500);</script>
     </div>
-
-    <script src="getMessages.js"></script>
-    <script src="getPseudos.js"></script>
-    <!-- on exécute getMessages() toutes les 500ms -->
-    <script>setInterval(getMessages, 500);</script>
-    <script>setInterval(getPseudos, 500);</script>
-  </div>
-</body>
-</html>
+  </body>
+  </html>
