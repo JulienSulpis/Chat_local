@@ -15,7 +15,7 @@ $reponse = $bdd->query('SELECT DISTINCT pseudo FROM mini_chat ORDER BY pseudo');
 // Affichage de chaque pseudo (toutes les données sont protégées par htmlspecialchars)
 while ($donnees = $reponse->fetch())
 {
-    echo '<li>' . htmlspecialchars($donnees['pseudo']) . '</li>';
+    echo '<tr><td>' . htmlspecialchars($donnees['pseudo']) . '</td></tr>';
 }
 
 $reponse->closeCursor();
