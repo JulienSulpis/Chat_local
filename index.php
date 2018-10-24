@@ -3,8 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Le chat de l'ambiance</title>
-  <link rel="icon" type="image/png" href="img/me.png">
+  <title>Awesome chat</title>
   <link href="bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet">
   <link href="stylesheet.css" rel="stylesheet">
 
@@ -13,7 +12,7 @@
 
 <body>
   <header>
-    <h1>Le chat de l'ambiance</h1>
+    <h1>Awesome Chat</h1>
   </header>
   <div class="container">
 
@@ -38,7 +37,7 @@
                 </div>
                 <div class="col-xs-8">
                   <label for="memo" class="checkbox">
-                    <input type="checkbox" name="memo"><span style="font-weight:normal"> Se souvenir de moi</span>
+                    <input type="checkbox" name="memo"><span style="font-weight:normal">Remember me</span>
                   </label>
                 </div>
               </div>
@@ -49,7 +48,7 @@
                 <input type="text" class="form-control" name="message" placeholder="Message" autofocus="autofocus" id="message"/>
                 <?php if(isset($_GET['message'])){echo '<span class="glyphicon glyphicon-remove form-control-feedback"></span><span class="help-block" style="margin-bottom:-8px">Message incorrect</span></div>';}?>
                 </div>
-                <button class="btn btn-primary col-lg-1" type="submit" style="display:none">Envoyer</button>
+                <button class="btn btn-primary col-lg-1" type="submit" style="display:none">Send</button>
               </form>
 
               <!-- on affiche la conversation dans la div -->
@@ -62,7 +61,7 @@
             <!-- on insère les pseudos -->
             <table class="table">
               <caption>
-                <h2>Participants</h2>
+                <h2>Members</h2>
               </caption>
               <tbody>
                 <?php include "getPseudos.php" ?>
